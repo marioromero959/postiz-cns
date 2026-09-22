@@ -3,10 +3,13 @@ import OpenAI from 'openai';
 import { shuffle } from 'lodash';
 import { zodResponseFormat } from 'openai/helpers/zod';
 import { z } from 'zod';
+import {
+  openAiChatModel,
+  openAiSdkOptions,
+} from '@gitroom/nestjs-libraries/openai/openai.config';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || 'sk-proj-',
-});
+const openai = new OpenAI(openAiSdkOptions());
+const chatModel = () => openAiChatModel();
 
 const PicturePrompt = z.object({
   prompt: z.string(),
@@ -42,7 +45,7 @@ export class OpenaiService {
     const { clips } = (
       await openai.chat.completions.parse(
         {
-          model: 'gpt-4.1',
+          model: chatModel(),
           messages: [
             {
               role: 'system',
@@ -93,7 +96,7 @@ Clips must not overlap. Write the title and the post in this language, whatever 
     return (
       (
         await openai.chat.completions.parse({
-          model: 'gpt-4.1',
+          model: chatModel(),
           messages: [
             {
               role: 'system',
@@ -114,7 +117,7 @@ Clips must not overlap. Write the title and the post in this language, whatever 
     return (
       (
         await openai.chat.completions.parse({
-          model: 'gpt-4.1',
+          model: chatModel(),
           messages: [
             {
               role: 'system',
@@ -148,7 +151,7 @@ Clips must not overlap. Write the title and the post in this language, whatever 
           ],
           n: 5,
           temperature: 1,
-          model: 'gpt-4.1',
+          model: chatModel(),
         }),
         openai.chat.completions.create({
           messages: [
@@ -164,7 +167,7 @@ Clips must not overlap. Write the title and the post in this language, whatever 
           ],
           n: 5,
           temperature: 1,
-          model: 'gpt-4.1',
+          model: chatModel(),
         }),
       ])
     ).flatMap((p) => p.choices);
@@ -202,7 +205,7 @@ Clips must not overlap. Write the title and the post in this language, whatever 
           content,
         },
       ],
-      model: 'gpt-4.1',
+      model: chatModel(),
     });
 
     const { content: articleContent } = websiteContent.choices[0].message;
@@ -222,7 +225,7 @@ Clips must not overlap. Write the title and the post in this language, whatever 
     const posts =
       (
         await openai.chat.completions.parse({
-          model: 'gpt-4.1',
+          model: chatModel(),
           messages: [
             {
               role: 'system',
@@ -255,7 +258,7 @@ Clips must not overlap. Write the title and the post in this language, whatever 
               return (
                 (
                   await openai.chat.completions.parse({
-                    model: 'gpt-4.1',
+                    model: chatModel(),
                     messages: [
                       {
                         role: 'system',
@@ -291,7 +294,7 @@ Clips must not overlap. Write the title and the post in this language, whatever 
         const parse =
           (
             await openai.chat.completions.parse({
-              model: 'gpt-4.1',
+              model: chatModel(),
               messages: [
                 {
                   role: 'system',

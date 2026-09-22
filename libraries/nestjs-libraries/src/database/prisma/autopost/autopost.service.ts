@@ -19,6 +19,10 @@ import { TypedSearchAttributes } from '@temporalio/common';
 import {
   organizationId,
 } from '@gitroom/nestjs-libraries/temporal/temporal.search.attribute';
+import {
+  chatOpenAiOptions,
+  openAiApiKey,
+} from '@gitroom/nestjs-libraries/openai/openai.config';
 const parser = new Parser();
 
 interface WorkflowChannelsState {
@@ -35,14 +39,10 @@ interface WorkflowChannelsState {
   };
 }
 
-const model = new ChatOpenAI({
-  apiKey: process.env.OPENAI_API_KEY || 'sk-proj-',
-  model: 'gpt-4.1',
-  temperature: 0.7,
-});
+const model = new ChatOpenAI(chatOpenAiOptions());
 
 const dalle = new DallEAPIWrapper({
-  apiKey: process.env.OPENAI_API_KEY || 'sk-proj-',
+  apiKey: openAiApiKey(),
   model: 'chatgpt-image-latest',
 });
 
