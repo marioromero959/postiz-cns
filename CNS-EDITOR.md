@@ -5,7 +5,9 @@
 - Archivo: `apps/frontend/src/components/launches/polonto.tsx`
 - Dependencia `polotno` eliminada del `package.json`
 - Login Solana / wallets eliminado
+- Autopost (RSS) deshabilitado
 - IA vía OmniRoute (OpenAI-compatible) con `OPENAI_BASE_URL` + `OPENAI_MODEL`
+- Temporal se mantiene (schedule/publish); ES limitado en RAM en el VPS
 
 ## Capacidades del editor
 - Fondo de color

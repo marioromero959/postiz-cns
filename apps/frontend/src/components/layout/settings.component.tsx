@@ -27,7 +27,6 @@ import Link from 'next/link';
 import { Webhooks } from '@gitroom/frontend/components/webhooks/webhooks';
 import { Sets } from '@gitroom/frontend/components/sets/sets';
 import { SignaturesComponent } from '@gitroom/frontend/components/settings/signatures.component';
-import { Autopost } from '@gitroom/frontend/components/autopost/autopost';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
 import { SVGLine } from '@gitroom/frontend/components/launches/launches.component';
 import { GlobalSettings } from '@gitroom/frontend/components/settings/global.settings';
@@ -95,9 +94,6 @@ export const SettingsPopup: FC<{
     }
     if (user?.tier?.webhooks) {
       arr.push({ tab: 'webhooks', label: t('webhooks_1', 'Webhooks') });
-    }
-    if (user?.tier?.autoPost) {
-      arr.push({ tab: 'autopost', label: t('auto_post', 'Auto Post') });
     }
     if (user?.tier.current !== 'FREE') {
       arr.push({ tab: 'sets', label: t('sets', 'Sets') });
@@ -181,12 +177,6 @@ export const SettingsPopup: FC<{
               {tab === 'webhooks' && !!user?.tier?.webhooks && (
                 <div>
                   <Webhooks />
-                </div>
-              )}
-
-              {tab === 'autopost' && !!user?.tier?.autoPost && (
-                <div>
-                  <Autopost />
                 </div>
               )}
 

@@ -2,15 +2,14 @@ import { proxyActivities, sleep } from '@temporalio/workflow';
 import { AutopostActivity } from '@gitroom/orchestrator/activities/autopost.activity';
 
 const { autoPost } = proxyActivities<AutopostActivity>({
-  startToCloseTimeout: '10 minute',
+  startToCloseTimeout: '1 minute',
   taskQueue: 'main',
   retry: {
-    maximumAttempts: 3,
-    backoffCoefficient: 1,
-    initialInterval: '2 minutes',
+    maximumAttempts: 1,
   },
 });
 
+/** CNS: autopost disabled — workflow idles and never calls the RSS/AI path. */
 export async function autoPostWorkflow({
   id,
   immediately,
@@ -18,13 +17,11 @@ export async function autoPostWorkflow({
   id: string;
   immediately: boolean;
 }) {
+  // Keep workflow registered for old IDs; do not run autopost logic.
   while (true) {
-    try {
-      if (immediately) {
-        await autoPost(id);
-      }
-    } catch (err) {}
-    immediately = true;
-    await sleep(3600000);
+    void id;
+    void immediately;
+    void autoPost;
+    await sleep('24 hours');
   }
 }
