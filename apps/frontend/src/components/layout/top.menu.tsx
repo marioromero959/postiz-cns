@@ -94,6 +94,28 @@ export const useMenuItem = () => {
       path: '/analytics',
     },
     {
+      name: t('ads', 'Ads'),
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M12 3L14.5 8.5L20.5 9.3L16.2 13.4L17.4 19.4L12 16.5L6.6 19.4L7.8 13.4L3.5 9.3L9.5 8.5L12 3Z"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ),
+      path: '/ads',
+      role: ['ADMIN', 'SUPERADMIN', 'USER'],
+    },
+    {
       name: t('media', 'Media'),
       icon: (
         <svg
