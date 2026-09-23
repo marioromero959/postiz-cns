@@ -1086,7 +1086,7 @@ export class InstagramProvider
       }
 
       case 'follower_count': {
-        return 'Follower Count';
+        return 'Followers';
       }
 
       case 'views': {

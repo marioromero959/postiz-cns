@@ -6,6 +6,7 @@ import { ChartSocial } from '@gitroom/frontend/components/analytics/chart-social
 import { Select } from '@gitroom/react/form/select';
 import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
 import { MissingReleaseModal } from '@gitroom/frontend/components/launches/missing-release.modal';
+import { translateAnalyticsLabel } from '@gitroom/frontend/components/platform-analytics/analytics-labels';
 
 interface AnalyticsData {
   label: string;
@@ -124,7 +125,7 @@ export const StatisticsModal: FC<{
                               }`}
                             />
                             <span className="text-[15px] font-medium text-newTableText">
-                              {p.label}
+                              {translateAnalyticsLabel(p.label, t)}
                             </span>
                           </div>
                         </div>

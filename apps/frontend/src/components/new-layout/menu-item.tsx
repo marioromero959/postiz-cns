@@ -4,24 +4,27 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-export const MenuItem: FC<{ label: string; icon: ReactNode; path: string; onClick?: () => void }> = ({
-  label,
-  icon,
-  path,
-  onClick,
-}) => {
+export const MenuItem: FC<{
+  label: string;
+  icon: ReactNode;
+  path: string;
+  onClick?: () => void;
+}> = ({ label, icon, path, onClick }) => {
   const currentPath = usePathname();
-  const isActive = currentPath.indexOf(path) === 0;
+  const isActive = path !== '#' && currentPath.indexOf(path) === 0;
 
   const className = clsx(
-    'group w-full minCustom:h-[54px] custom:h-[44px] py-[8px] px-[6px] minCustom:gap-[4px] custom:gap-[2px] flex flex-col font-[600] items-center justify-center rounded-[12px] hover:text-textItemFocused hover:bg-boxFocused transition-colors',
-    isActive ? 'text-textItemFocused bg-boxFocused' : 'text-textItemBlur'
+    'group mx-auto box-border flex w-full max-w-[56px] flex-col items-center justify-center gap-[2px] rounded-[12px] px-[4px] py-[8px] text-center font-[600] transition-colors hover:bg-boxFocused hover:text-textItemFocused',
+    'minCustom:h-[54px] custom:h-[44px]',
+    isActive ? 'bg-boxFocused text-textItemFocused' : 'text-textItemBlur'
   );
 
   const inner = (
     <>
-      <div className="custom:scale-90 transition-transform">{icon}</div>
-      <div className="custom:text-[9px] minCustom:text-[10px] leading-[1.1] text-center">
+      <div className="flex w-full origin-center items-center justify-center custom:scale-90">
+        {icon}
+      </div>
+      <div className="w-full text-center leading-[1.1] custom:text-[9px] minCustom:text-[10px]">
         {label}
       </div>
     </>
@@ -29,7 +32,7 @@ export const MenuItem: FC<{ label: string; icon: ReactNode; path: string; onClic
 
   if (onClick) {
     return (
-      <button onClick={onClick} title={label} className={className}>
+      <button type="button" onClick={onClick} title={label} className={className}>
         {inner}
       </button>
     );
@@ -40,7 +43,7 @@ export const MenuItem: FC<{ label: string; icon: ReactNode; path: string; onClic
       prefetch={true}
       href={path}
       title={label}
-      {...path.indexOf('http') === 0 && { target: '_blank' }}
+      {...(path.indexOf('http') === 0 ? { target: '_blank' } : {})}
       className={className}
     >
       {inner}

@@ -17,6 +17,7 @@ import { PostSettingsTool } from '@gitroom/nestjs-libraries/chat/tools/post.sett
 import { UploadWidgetTool } from '@gitroom/nestjs-libraries/chat/tools/upload.widget.tool';
 import { UploadWidgetTicketTool } from '@gitroom/nestjs-libraries/chat/tools/upload.widget.ticket.tool';
 import { UploadWidgetStatusTool } from '@gitroom/nestjs-libraries/chat/tools/upload.widget.status.tool';
+import { AnalyticsTool } from '@gitroom/nestjs-libraries/chat/tools/analytics.tool';
 
 export const toolList = [
   IntegrationListTool,
@@ -26,6 +27,7 @@ export const toolList = [
   IntegrationSchedulePostTool,
   PostsListTool,
   PostSettingsTool,
+  AnalyticsTool,
   GenerateVideoOptionsTool,
   VideoFunctionTool,
   GenerateVideoTool,

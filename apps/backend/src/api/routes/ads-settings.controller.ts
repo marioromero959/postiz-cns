@@ -22,7 +22,16 @@ type AdsProviderConfig = {
   pixelId?: string;
 };
 
+type AdsClientSettings = {
+  google?: AdsProviderConfig;
+  meta?: AdsProviderConfig;
+  instagram?: AdsProviderConfig;
+};
+
+/** Ads settings keyed by channel-group (customer) id */
 type AdsSettings = {
+  byCustomer?: Record<string, AdsClientSettings>;
+  // legacy flat shape (pre–per-client) — still accepted on read
   google?: AdsProviderConfig;
   meta?: AdsProviderConfig;
   instagram?: AdsProviderConfig;
@@ -45,7 +54,7 @@ export class AdsSettingsController {
       const raw = await fs.readFile(this.fileFor(org.id), 'utf8');
       return JSON.parse(raw);
     } catch {
-      return {};
+      return { byCustomer: {} };
     }
   }
 
@@ -56,9 +65,12 @@ export class AdsSettingsController {
   ) {
     const dir = this.dir();
     await fs.mkdir(dir, { recursive: true });
+    const payload: AdsSettings = {
+      byCustomer: body?.byCustomer ?? {},
+    };
     await fs.writeFile(
       this.fileFor(org.id),
-      JSON.stringify(body ?? {}, null, 2),
+      JSON.stringify(payload, null, 2),
       'utf8'
     );
     return { ok: true };

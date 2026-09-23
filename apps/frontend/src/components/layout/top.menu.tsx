@@ -116,27 +116,6 @@ export const useMenuItem = () => {
       role: ['ADMIN', 'SUPERADMIN', 'USER'],
     },
     {
-      name: t('media', 'Media'),
-      icon: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="21"
-          viewBox="0 0 20 21"
-          fill="none"
-        >
-          <path
-            d="M7.50008 3L6.66675 7.16667M13.3334 3L12.5001 7.16667M18.3334 7.16667H1.66675M5.66675 18H14.3334C15.7335 18 16.4336 18 16.9684 17.7275C17.4388 17.4878 17.8212 17.1054 18.0609 16.635C18.3334 16.1002 18.3334 15.4001 18.3334 14V7C18.3334 5.59987 18.3334 4.8998 18.0609 4.36502C17.8212 3.89462 17.4388 3.51217 16.9684 3.27248C16.4336 3 15.7335 3 14.3334 3H5.66675C4.26662 3 3.56655 3 3.03177 3.27248C2.56137 3.51217 2.17892 3.89462 1.93923 4.36502C1.66675 4.8998 1.66675 5.59987 1.66675 7V14C1.66675 15.4001 1.66675 16.1002 1.93923 16.635C2.17892 17.1054 2.56137 17.4878 3.03177 17.7275C3.56655 18 4.26662 18 5.66675 18Z"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ),
-      path: '/media',
-    },
-    {
       name: t('plugs', 'Plugs'),
       icon: (
         <svg
@@ -339,7 +318,7 @@ export const TopMenu: FC = () => {
   const { isGeneral, billingEnabled } = useVariables();
   return (
     <>
-      <div className="flex flex-1 flex-col minCustom:gap-[16px] blurMe">
+      <div className="flex flex-1 flex-col items-center minCustom:gap-[12px] custom:gap-[8px] blurMe">
         {
           // @ts-ignore
           user?.orgId &&
@@ -372,7 +351,7 @@ export const TopMenu: FC = () => {
               ))
         }
       </div>
-      <div className="flex flex-col minCustom:gap-[20px] custom:gap-[8px] blurMe">
+      <div className="flex flex-col items-center minCustom:gap-[12px] custom:gap-[8px] blurMe">
         {secondMenu
           .filter((f) => {
             if (f.hide) {

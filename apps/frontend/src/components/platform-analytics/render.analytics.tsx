@@ -5,6 +5,7 @@ import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import { ChartSocial } from '@gitroom/frontend/components/analytics/chart-social';
 import { LoadingComponent } from '@gitroom/frontend/components/layout/loading';
 import { useT } from '@gitroom/react/translation/get.transation.service.client';
+import { translateAnalyticsLabel } from '@gitroom/frontend/components/platform-analytics/analytics-labels';
 
 interface AnalyticsDataItem {
   label: string;
@@ -52,7 +53,8 @@ const AnalyticsCard: FC<{
   item: AnalyticsDataItem;
   total: string | number;
   index: number;
-}> = ({ item, total, index }) => {
+  label: string;
+}> = ({ item, total, index, label }) => {
   const colorVariants = ['purple', 'green', 'blue'] as const;
   const color = colorVariants[index % colorVariants.length];
 
@@ -83,7 +85,7 @@ const AnalyticsCard: FC<{
               `}
             />
             <span className="text-[15px] font-medium text-newTableText">
-              {item.label}
+              {label}
             </span>
           </div>
           {item.percentageChange !== undefined && (
@@ -247,6 +249,7 @@ export const RenderAnalytics: FC<{
           item={item}
           total={totals[index]}
           index={index}
+          label={translateAnalyticsLabel(item.label, t)}
         />
       ))}
     </div>
